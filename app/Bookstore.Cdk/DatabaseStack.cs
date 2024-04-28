@@ -23,34 +23,29 @@ public class DatabaseStack : Stack
         var dbSG = new SecurityGroup(this, "DatabaseSecurityGroup", new SecurityGroupProps
         {
             Vpc = props.Vpc,
-            Description = "Allow access to the SQL Server instance from the website",
+            Description = "Allow access to the MySQL instance from the website",
         });
 
-        this.Database = new DatabaseInstance(this, $"{Constants.AppName}SqlDb", new DatabaseInstanceProps
+        this.Database = new DatabaseInstance(this, $"{Constants.AppName}MySqlDb", new DatabaseInstanceProps
         {
             Vpc = props.Vpc,
             VpcSubnets = new SubnetSelection
             {
                 SubnetType = SubnetType.PRIVATE_WITH_EGRESS
             },
-            // SQL Server 2017 Express Edition, in conjunction with a db.t2.micro instance type,
-            // fits inside the free tier for new accounts
-            Engine = DatabaseInstanceEngine.SqlServerEx(new SqlServerExInstanceEngineProps
+            Engine = DatabaseInstanceEngine.Mysql(new MySqlInstanceEngineProps
             {
-                Version = SqlServerEngineVersion.VER_14
+                Version = MysqlEngineVersion.VER_8_0_32 // Change the MySQL version to a supported one
             }),
             StorageType = StorageType.GP3,
-            AllocatedStorage = 20,            
+            AllocatedStorage = 20,
             Port = DatabasePort,
             SecurityGroups = new ISecurityGroup[]
             {
                 dbSG
             },
-            InstanceType = Amazon.CDK.AWS.EC2.InstanceType.Of(InstanceClass.BURSTABLE2, InstanceSize.MICRO),
+            InstanceType = Amazon.CDK.AWS.EC2.InstanceType.Of(InstanceClass.BURSTABLE3, InstanceSize.SMALL), // Change the instance class
             InstanceIdentifier = $"{Constants.AppName}Database",
-            // As this is a sample app, turn off automated backups to avoid any storage costs
-            // of automated backup snapshots. It also helps the stack launch a little faster by
-            // avoiding an initial backup.
             BackupRetention = Duration.Seconds(0)
         });
 

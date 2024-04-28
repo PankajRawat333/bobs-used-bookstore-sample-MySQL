@@ -1,7 +1,7 @@
 # 'Bob's Used Books' Sample Application
 
 ## Overview
-_Bob's Used Books_ is a sample application built on ASP.NET Core 6.0 that aims to represent a simple, real-world application. It is a monolithic n-tier application with an ASP.NET Core MVC front end and a Microsoft SQL Server database backend.
+_Bob's Used Books_ is a sample application built on ASP.NET Core 6.0 that aims to represent a simple, real-world application. It is a monolithic n-tier application with an ASP.NET Core MVC front end and a MySQL database backend.
 
 The MVC application contains a customer portal and an administration portal. The customer portal enables customers to search for books, select and add them to a shopping cart, and work through a simulated check-out process. Customers can also offer their own books for resale through the website.
 
@@ -37,7 +37,7 @@ Make sure the _Local_ profile is selected, then press **F5** to debug the applic
 
 ![Projects in Visual Studio's Solution Explorer](./media/local_profile.png)
 
-When running under the _local_ profile the application will use a SQL Server Express LocalDB instance for database support with the connection string defined in _appSettings.Development.json_. User authentication is simulated. Clicking the _Log in_ option results in a transition to an authenticated state, without prompting for username or password, or user sign-up. This enables you to test the work processes in the admin portal, and customer features such as shopping cart, without needing to provision any cloud resources. Facades within the application abstract away potential use of AWS services such as Amazon S3 to the local file system.
+When running under the _local_ profile the application will use a MySQL instance for database support with the connection string defined in _appSettings.Development.json_. User authentication is simulated. Clicking the _Log in_ option results in a transition to an authenticated state, without prompting for username or password, or user sign-up. This enables you to test the work processes in the admin portal, and customer features such as shopping cart, without needing to provision any cloud resources. Facades within the application abstract away potential use of AWS services such as Amazon S3 to the local file system.
 
 Launch profiles, contained in the application's launchSettings.json file, are used to determine whether you are running the application fully local (no AWS resources) or local with AWS resources. The launch profile that represents a fully local run, without using any AWS services, is called the _Local_ profile. The second profile, in which the application can be run locally but also make use of some AWS services, is called the _Integrated_ profile. See the [Deployment](#deployment) section for details on launching the application with the _Integrated_ profile.
 
@@ -98,7 +98,7 @@ You are now debugging the Bookstore application locally, however the application
 
 ### Perform a full deployment
 
-In addition to the AWS resources that are created and used by the [_Integrated_ launch](#running-and-debugging-with-the-integrated-launch-profile), a full deployment deploys the application to an [Amazon EC2](https://aws.amazon.com/ec2/) instance and provisions an [Amazon RDS for SQL Server](https://aws.amazon.com/rds/sqlserver/) database.
+In addition to the AWS resources that are created and used by the [_Integrated_ launch](#running-and-debugging-with-the-integrated-launch-profile), a full deployment deploys the application to an [Amazon EC2](https://aws.amazon.com/ec2/) instance and provisions an [Amazon RDS for MySQL](https://aws.amazon.com/rds/mysql/) database.
 
 > **NOTE:** Ensure your development environment meets the [Prerequisites](#prerequisites) before attempting to deploy the application
 
@@ -144,13 +144,13 @@ You are then signed into the application and placed at the customer portal home 
 
 ## Amazon Cloud Development Kit (CDK)
 
-The application uses the [AWS Cloud Development Kit (CDK)](https://aws.amazon.com/cdk) to provision resources in AWS. The CDK project can create and configure either the minimal cloud resources needed to support the _Integrated_ launch profile of the web application, or a full set of resources that simulate a "production deployment" that includes a Virtual Private Cloud (VPC), a SQL Server database in Amazon RDS, application roles, and more.
+The application uses the [AWS Cloud Development Kit (CDK)](https://aws.amazon.com/cdk) to provision resources in AWS. The CDK project can create and configure either the minimal cloud resources needed to support the _Integrated_ launch profile of the web application, or a full set of resources that simulate a "production deployment" that includes a Virtual Private Cloud (VPC), a MySQL database in Amazon RDS, application roles, and more.
 
 The CDK project uses Infrastructure as Code (IaC) to define and configure the application's resources. It is a .NET console project, which you can examine by opening the _Bookstore.Cdk_ project. During deployment, the CDK creates [AWS CloudFormation](https://aws.amazon.com/cloudformation) Stacks containing the resources defined using C# in the _Bookstore.Cdk_ application. The stacks in the sample application are modular and take advantage of [cross-stack references](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-crossstackref.html) to minimize code duplication and maximize reuse. The following stacks have been defined:
 
 * BobsBookstoreCore - Deploys the minimal resources needed to support the _Integrated_ launch profile
 * BobsBookstoreNetwork - Deploys a VPC that is used by the application in a "production" deployment
-* BobsBookstoreDatabase - Deploys an RDS for SQL Server database that is used by the application in a "production" deployment. This stack depends on resources created in the _BobsBookstoreNetwork_ stack
+* BobsBookstoreDatabase - Deploys an RDS for MySQL database that is used by the application in a "production" deployment. This stack depends on resources created in the _BobsBookstoreNetwork_ stack
 * BobsBookstoreEC2 - Deploys the application to an EC2 Linux instance. This stack depends on resources created in the _BobsBookstoreCore_, _BobsBookstoreNetwork_, and _BobsBookstoreDatabase_ stacks
 
 The _BobsBookstoreCore_ stack is used to deploy the minimal resources needed to support the _Integrated_ launch profile. Use the _BobsBookstoreEC2_ stack to deploy the resources required to simulate a full "production" deployment to EC2.

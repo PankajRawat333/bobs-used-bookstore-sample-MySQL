@@ -5,7 +5,6 @@ using Amazon.SecretsManager;
 using Bookstore.Data;
 using Bookstore.Domain.AdminUser;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +12,7 @@ using System.Text.Json;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using MySqlConnector;
 
 namespace Bookstore.Web.Startup
 {
@@ -31,14 +31,12 @@ namespace Bookstore.Web.Startup
             builder.Services.AddAWSService<IAmazonRekognition>();
 
             var connString = GetDatabaseConnectionString(builder.Configuration);
-            builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connString));
+            builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseMySql(connString, ServerVersion.AutoDetect(connString)));
             builder.Services.AddSession();
 
             return builder;
         }
 
-        // If we find a non-empty connection string in appsettings, use it, otherwise
-        // attempt to build it from data in Secrets Manager
         private static string GetDatabaseConnectionString(ConfigurationManager configuration)
         {
             // This is the key of a string value in Parameter Store containing the name of the
@@ -62,7 +60,7 @@ namespace Bookstore.Web.Startup
                 Console.WriteLine($"Reading db credentials from secret {dbSecretId}");
 
                 // Read the db secrets posted into Secrets Manager by the CDK. The secret provides the host,
-                // port, userid, and password, which we format into the final connection string for SQL Server.
+                // port, userid, and password, which we format into the final connection string for MySQL.
                 // For this code to work locally, appsettings.json must contain an AWS object with profile and
                 // region info. When deployed to an EC2 instance, credentials and region will be inferred from
                 // the instance profile applied to the instance.
@@ -88,9 +86,9 @@ namespace Bookstore.Web.Startup
                     PropertyNameCaseInsensitive = true
                 });
 
-                var partialConnString = $"Server={dbSecrets.Host},{dbSecrets.Port}; Initial Catalog=BobsUsedBookStore;MultipleActiveResultSets=true; Integrated Security=false";
+                var partialConnString = $"Server={dbSecrets.Host};Port={dbSecrets.Port};Database=BobsUsedBookStore;";
 
-                var builder = new SqlConnectionStringBuilder(partialConnString)
+                var builder = new MySqlConnectionStringBuilder(partialConnString)
                 {
                     UserID = dbSecrets.Username,
                     Password = dbSecrets.Password
