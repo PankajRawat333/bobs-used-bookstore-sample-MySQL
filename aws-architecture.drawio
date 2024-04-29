@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-07-28T14:42:45.902Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0) Gecko/20100101 Firefox/102.0" etag="uzkPtOYR9RQ_mt37KMGg" version="21.6.5" type="device">
+<mxfile host="Electron" modified="2024-04-29T11:16:51.928Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="39ZpoMTCxTTfDQg2Tsy-" version="24.2.5" type="device">
   <diagram name="Page-1" id="Q-XGeqy0s4Lk3BjT24DE">
-    <mxGraphModel dx="1444" dy="1128" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="780" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -61,7 +61,7 @@
         <mxCell id="s_8htkPsqy1MqizyE1mn-22" value="Private subnet" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;grStroke=0;strokeColor=#147EBA;fillColor=#E6F2F8;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=0;" parent="1" vertex="1">
           <mxGeometry x="760" y="510" width="220" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="s_8htkPsqy1MqizyE1mn-23" value="&lt;div&gt;bobsbookstoredatabase&lt;/div&gt;&lt;div&gt;RDS MySQLs&lt;br&gt;&lt;/div&gt;" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#4D72F3;gradientDirection=north;fillColor=#3334B9;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rds;" parent="1" vertex="1">
+        <mxCell id="s_8htkPsqy1MqizyE1mn-23" value="&lt;div&gt;bobsbookstoredatabase&lt;/div&gt;&lt;div&gt;RDS MySQL&lt;br&gt;&lt;/div&gt;" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#4D72F3;gradientDirection=north;fillColor=#3334B9;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rds;" parent="1" vertex="1">
           <mxGeometry x="842" y="301" width="56" height="56" as="geometry" />
         </mxCell>
         <mxCell id="s_8htkPsqy1MqizyE1mn-33" value="&lt;div&gt;Amazon S3&lt;br&gt;&lt;/div&gt;" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#60A337;gradientDirection=north;fillColor=#277116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;" parent="1" vertex="1">
@@ -106,7 +106,7 @@
             <mxPoint x="290" y="364" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="s_8htkPsqy1MqizyE1mn-55" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeColor=#000000;dashed=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;dashPattern=8 8;" parent="1" target="s_8htkPsqy1MqizyE1mn-52" edge="1" source="s_8htkPsqy1MqizyE1mn-24">
+        <mxCell id="s_8htkPsqy1MqizyE1mn-55" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeColor=#000000;dashed=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;dashPattern=8 8;" parent="1" source="s_8htkPsqy1MqizyE1mn-24" target="s_8htkPsqy1MqizyE1mn-52" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="632" y="277" as="sourcePoint" />
             <mxPoint x="755" y="126" as="targetPoint" />
